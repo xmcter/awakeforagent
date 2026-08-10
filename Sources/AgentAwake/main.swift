@@ -15,7 +15,6 @@ let defaultAgentList: [Agent] = [
     Agent(path: "/Applications/ChatGPT.app/Contents/Resources/codex", name: "Codex"),
     Agent(path: "/Applications/Claude.app", name: "Claude"),
     Agent(path: "opencode", name: "OpenCode"),
-    Agent(path: ".workbuddy/binaries/node", name: "WorkBuddy"),
 ]
 
 /// 读配置文件覆盖默认列表;文件不存在或解析失败时用默认

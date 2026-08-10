@@ -7,7 +7,7 @@
 ## 特性
 
 - 菜单栏常驻：☕ 防休眠中 / 🌙 空闲，每 5 秒刷新
-- 中文菜单：状态行、监控列表（✓ 运行 / ○ 未运行）、停用/启用防休眠、查看日志、退出
+- 中文菜单：状态行、监控列表（✓ 运行中 / ○ 未运行）、停用/启用防休眠、查看日志、退出
 - 菜单打开时实时重建（NSMenuDelegate），状态不过期
 - 无 Dock 图标（LSUIElement），只占状态栏
 - 引擎自愈：每次防休眠只持续 35 秒并循环刷新，引擎崩溃最多 35 秒后自动恢复休眠
@@ -36,7 +36,7 @@ cp -R build/AgentAwake.app ~/Applications/
 
 ## 配置：监控哪些 agent
 
-默认列表覆盖常见 agent：Command Code / Antigravity / Codex / Claude / OpenCode / WorkBuddy。
+默认列表覆盖常见 agent：Command Code / Antigravity / Codex / Claude / OpenCode。
 本机特定安装可写配置文件覆盖，**App 和防休眠引擎都读同一份**：
 
 ```json
