@@ -153,7 +153,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         for agent in agentList {
             let running = processExists(agent.path)
-            let title = running ? "✓ \(agent.name)" : "○ \(agent.name)"
+            let title = running ? "✓ \(agent.name) · 运行中" : "○ \(agent.name)"
             let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
             item.isEnabled = false
             if running { item.attributedTitle = greenText(title) }
