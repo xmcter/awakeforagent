@@ -11,6 +11,7 @@
 - 菜单打开时实时重建（NSMenuDelegate），状态不过期
 - 无 Dock 图标（LSUIElement），只占状态栏
 - 引擎自愈：每次防休眠只持续 35 秒并循环刷新，引擎崩溃最多 35 秒后自动恢复休眠
+- **合盖防休眠**：agent 运行时 `pmset disablesleep 1`（需一次性 sudoers 授权），合盖也不休眠
 - 省电：电池 ≤10% 时不再防休眠
 
 ## 结构
@@ -59,6 +60,13 @@ cp -R build/AgentAwake.app ~/Applications/
 App 控制的是 `~/.caffeinate-agents/caffeinate-agents.sh`（launchd 后台循环：
 每 20 秒检测 agent 进程，有则 `caffeinate -i -t 35` 防休眠并循环刷新，无则释放；
 电池 ≤10% 让位）。「停用/启用」= 该 LaunchAgent 的 load/unload。
+
+**合盖防休眠**：引擎在 agent 运行时还会执行 `sudo -n /usr/bin/pmset -a disablesleep 1`
+（阻止合盖休眠），agent 停止时恢复 0。需要一次性配置 sudoers 免密（只放行这两条命令）：
+
+```bash
+echo "$(whoami) ALL=(root) NOPASSWD: /usr/bin/pmset -a disablesleep 0, /usr/bin/pmset -a disablesleep 1" | sudo tee /etc/sudoers.d/agentawake >/dev/null && sudo chmod 440 /etc/sudoers.d/agentawake && sudo visudo -cf /etc/sudoers.d/agentawake
+```
 
 引擎基于 <https://github.com/rileycx/caffeinate-agents>（MIT）扩展而来。
 
